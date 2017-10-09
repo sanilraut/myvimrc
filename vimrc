@@ -2,6 +2,18 @@ call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+function! BuildYCM(info)
+          " info is a dictionary with 3 fields
+          "   " - name:   name of the plugin
+          "     " - status: 'installed', 'updated', or 'unchanged'
+          "       " - force:  set on PlugInstall! or PlugUpdate!
+                   if a:info.status == 'installed' || a:info.force
+                       !./install.py
+                         endif
+                         endfunction
+    
+Plug 'Valloric/YouCompleteMe', { 'do':      function('BuildYCM') }
+
 call plug#end()
 " Give a shortcut key to NERD Tree
  map <F2> :NERDTreeToggle<CR>
