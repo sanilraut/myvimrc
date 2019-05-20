@@ -1,0 +1,71 @@
+":q!
+"set rtp+=~/.vim/bundle/YouCompleteMe
+"
+"
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+"let g:ycm_server_keep_logfiles = 1
+"let g:ycm_server_log_level = 'debug'
+
+call plug#begin('~/.vim/plugged')
+"Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+Plug 'fatih/vim-go'
+
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'itchyny/lightline.vim'
+
+"Plug 'Valloric/YouCompleteMe'
+" Plugin outside ~/.vim/plugged with post-update hook
+ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+ Plug 'maralla/completor.vim'
+ Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugins/gocode/vim/symlink.sh' }
+"Plug 'itchyny/lightline.vim'
+
+call plug#end()
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"export TERM=xterm-256color
+:set mouse=a
+let g:NERDTreeMouseMode=3 
+
+" Give a shortcut key to NERD Tree
+"map <F2> :NERDTreeToggle<CR>
+set laststatus=2
+set statusline+=%F
+set encoding=utf-8
+
+"set tags=./tags,tags;$HOME
+set tags=tags;/
+"set tags=./tags,./TAGS,tags;~,TAGS;~
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+"inoremap <c-x><c-]> <c-]>
+" in normal mode F2 will save the file
+" nmap <F2> :w<CR>
+" in insert mode F2 will exit insert, save, enters insert again
+" imap <F2> <ESC>:w<CR>
+set number
+
+" ctags optimization
+set autochdir
+set tags=tags;
+" indentation rules for FFmpeg: 4 spaces, no tabs
+"set expandtab
+"set shiftwidth=4
+"set softtabstop=4
+"set cindent
+"set cinoptions=(0
+" " Allow tabs in Makefiles.
+"autocmd FileType make,automake set noexpandtab shiftwidth=8 softtabstop=8
+" " Trailing whitespace and tabs are forbidden, so highlight them.
+"highlight ForbiddenWhitespace ctermbg=red guibg=red
+" match ForbiddenWhitespace /\s\+$\|\t/
+" " Do not highlight spaces at the end of line while typing on that line.
+"autocmd InsertEnter * match ForbiddenWhitespace /\t\|\s\+\%#\@<!$/
+Plug 'othree/xml.vim'
+
